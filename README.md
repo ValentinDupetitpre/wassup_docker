@@ -1,2 +1,3 @@
 # wassup_docker
-*Step 1* Créer un environnement node Express
+##Step 1 
+* Créer un environnement node Express
