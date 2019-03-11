@@ -31,8 +31,8 @@ docker run uxrepublic/node
 On a besoin de mapper le port interne de l'app à un port externe sur la machine qui le lance. On a besoin de rajouter :
 ```
 -p [external port]:[internal port]
-----------------------------------------------------------------------
 ```
+----------------------------------------------------------------------
 NB: Pour stopper un docker run -> ouvrir un nouvel onglet de terminal
 ```
 docker ps
