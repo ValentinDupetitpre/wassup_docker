@@ -12,7 +12,7 @@ https://runnable.com/docker/install-docker-on-macos
 * * EXPOSE, this means we are opening up a port, it is through this port that we communicate with our container
 * * ENTRYPOINT, this is where we should state how we start up our application, the commands need to be specified as an array so the array [“node”, “app.js”] will be translated to the node app.js in the terminal
 
-* Monter une image
+* Créer une image
 ```
 docker build -t uxrepublic/node:latest .
 ```
