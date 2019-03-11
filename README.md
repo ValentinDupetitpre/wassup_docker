@@ -32,7 +32,7 @@ On a besoin de mapper le port interne de l'app à un port externe sur la machine
 ```
 -p [external port]:[internal port]
 ```
-NB: Pour stopper un docker run -> ouvrir un nouvel onglet de terminal
+NB: Pour stopper un docker run -> ouvrir un nouvel onglet de terminal. Les 3 premiers charactères du l'id suffisent
 ```
 docker ps
 docker stop <idContainer>
