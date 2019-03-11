@@ -46,3 +46,5 @@ docker run -p 8000:3000 uxrepublic/node
 ```
 
 * Ajouter des variables d'environnement
+On a ajouté une variable d'environnement dans le Dockerfile pour le PORT. On utilise le $ pour appeler une variable dans ce fichier.
+* Lire les variables d'environnement dans App.js
