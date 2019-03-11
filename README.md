@@ -54,3 +54,22 @@ On a ajouté une variable d'environnement dans le Dockerfile pour le PORT. On ut
 Depuis Node, on peut lire les variables d'environnement grâce à process.env.PORT
 
 * Gestion du container
+* * Mode Deamon - Rajouter -d au docker run pour voir l'id du container lancé. C'est plus simple s'il faut l'arrêter. Avec ce mode, le container est lancé en arrière-plan et aucun output n'apparait dans la console.
+* * Mode Interactif - Ce mode permet de 'rentrer' dans le container qui fonctionne et effectuer des commandes bash par exemple. Pour cela il faut lancer la commande suivante.
+ ```
+docker exec -it <id> bash
+```
+On peut lancer une commande (node par exemple) dans le container avec la ligne de commande suivante
+```
+docker exec <id> node app.js
+```
+
+----------------------------------------------------------------------
+NB : Docker Stop Vs Docker Kill
+Docker stop lance les commandes SIGTERM puis SIGKILL. Ca permet de stoper Docker plus proprement en sauvegardant l'état.
+Docker kill lance seulement SIGKILL. L'état n'est pas nécessairement sauvegardé.
+En prod il vaut mieux lancer Docker stop.
+----------------------------------------------------------------------
+
+## Step 2 
+* Mise à jour de l'app
