@@ -73,5 +73,10 @@ En prod il vaut mieux lancer Docker stop.
 
 ----------------------------------------------------------------------
 
+Pour nettoyer Docker de tous les containers qui peuvent tourner en arrière plan :
+```
+docker rm <id>
+```
+
 ## Step 2 
 * Mise à jour de l'app
