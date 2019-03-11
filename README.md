@@ -9,3 +9,17 @@
 * * RUN, this runs a command in the terminal, in our case we are installing all the libraries we need to build our Node.js express application
 * * EXPOSE, this means we are opening up a port, it is through this port that we communicate with our container
 * * ENTRYPOINT, this is where we should state how we start up our application, the commands need to be specified as an array so the array [“node”, “app.js”] will be translated to the node app.js in the terminal
+
+commande : 
+```
+docker build -t uxrepublic/node:latest .
+```
+Cette ligne de commande créé une image. Le "." indique à Docker où se trouve le Dockerfile (ici le répertoire actuel). Si vous n'avez l'image de l'OS du FROM (dans Dockerfile) elle sera téléchargée depuis le Docker Hub. Ensuite votre image sera créée.
+
+Dans le terminal vous pouvez observer que l'image de l'OS (node:latest) est téléchargée depuis le Docker Hub. Ensuite chacune des commandes du Dockerfile sont executées (WORKDIR, RUN...)
+
+```
+docker images
+```
+Permet de voir l'image que l'on vient de créer
+* Créer un container
