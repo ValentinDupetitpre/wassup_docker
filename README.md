@@ -14,7 +14,6 @@ https://runnable.com/docker/install-docker-on-macos
 * * ENTRYPOINT, this is where we should state how we start up our application, the commands need to be specified as an array so the array [“node”, “app.js”] will be translated to the node app.js in the terminal
 
 
-commande : 
 ```
 docker build -t uxrepublic/node:latest .
 ```
