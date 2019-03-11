@@ -1,4 +1,7 @@
 # wassup_docker
+## Pré-requis
+https://runnable.com/docker/install-docker-on-macos
+
 ## Step 1 
 * Créer un environnement node Express
 * Créer un Dockerfile
@@ -9,6 +12,7 @@
 * * RUN, this runs a command in the terminal, in our case we are installing all the libraries we need to build our Node.js express application
 * * EXPOSE, this means we are opening up a port, it is through this port that we communicate with our container
 * * ENTRYPOINT, this is where we should state how we start up our application, the commands need to be specified as an array so the array [“node”, “app.js”] will be translated to the node app.js in the terminal
+
 
 commande : 
 ```
