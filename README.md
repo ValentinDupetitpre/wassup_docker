@@ -63,3 +63,13 @@ On peut lancer une commande (node par exemple) dans le container avec la ligne d
 ```
 docker exec <id> node app.js
 ```
+
+----------------------------------------------------------------------
+NB : Docker Stop Vs Docker Kill
+Docker stop lance les commandes SIGTERM puis SIGKILL. Ca permet de stoper Docker plus proprement en sauvegardant l'état.
+Docker kill lance seulement SIGKILL. L'état n'est pas nécessairement sauvegardé.
+En prod il vaut mieux lancer Docker stop.
+----------------------------------------------------------------------
+
+## Step 2 
+* Mise à jour de l'app
