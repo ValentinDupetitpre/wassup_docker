@@ -82,7 +82,7 @@ docker rm <id>
 * Mise à jour de l'app
 
 Après une mise à jour de l'app, les changements ne sont pas reportés sur le container. Pour cela il faut :
-  * Stopper le container
+*  * Stopper le container
   * Retirer le container
   * Recréer l'image
   * Lancer le container à nouveau
