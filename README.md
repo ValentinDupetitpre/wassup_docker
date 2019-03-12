@@ -198,3 +198,24 @@ Rebuild le container et relance le. La route faite tout à l'heure doit fonction
 
 ## Step 3 db
 * Installer et connecter Mysql
+
+Sur mac (pour les autres os : télécharger un exec) : 
+```
+brew install mysql
+```
+
+mysql -uroot ne fonctionne pas ? lancer la commande suivante :
+
+```
+brew services start mysql
+```
+
+Réessayer de se connecter à mysql. Créer une table (préférablemet dans un fichier sql). Si vous avez fais un fichier sql un simple : source [fichier.sql] devrait suffire. 
+
+```
+show tables;
+```
+
+Votre table a bien été créée. Passons à la suite.
+
+* Mysql en Image Docker 
