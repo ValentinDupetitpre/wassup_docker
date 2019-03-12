@@ -161,15 +161,40 @@ Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans n
 
 * Monter un sous-répertoire en tant que volume
 
-On peut utiliser un répertoire en tant que volume avec Docker. Pour cela nous allons créer un fichier dans un nouveau repertoire : /logs/logs.txt que l'on initialize avec un texte.
+On peut utiliser un répertoire en tant que volume avec Docker. Pour cela nous allons créer un fichier dans un nouveau repertoire : /test/logs.txt que l'on initialize avec un texte.
 
 ```
-docker run -d -p 8000:3000 --name my-other-container --volume $(pwd)/logs:/logs uxrepublic/node
+docker run -d -p 8000:3000 --name my-other-container --volume $(pwd)/test:/logs uxrepublic/node
 ```
 
-Ici $(pwd)/logs indique que l'on va utiliser ce repertoire en tant que source pour le volume et que l'on va retrouver son contenu dans /logs dans le volume. Autrement dit, on monte le repertoire logs de notre dossier actuel dans un repertoire qui s'appelle logs dans le volume.
+Ici $(pwd)/test indique que l'on va utiliser ce repertoire en tant que source pour le volume et que l'on va retrouver son contenu dans /logs dans le volume. Autrement dit, on monte le repertoire test de notre dossier actuel dans un repertoire qui s'appelle logs dans le volume.
 
 En lancant une commande bash sur le container on peut retrouver ce que l'on avait mis dans logs.txt.
 Si on modifie le fichier sur notre ordinateur, il s'en retrouve modifié dans le volume.
 
 * Considérer une app comme un volume
+
+Pour commencer on kill et supprime le container que l'on vient de faire. Puis on relance le container avec un volume différent : --volume $(pwd):/app : 
+
+```
+docker run -d -p 8000:3000 --name my-container --volume $(pwd):/app uxrepublic/node
+```
+
+Dorénavant, lorsque quelque chose sera modifié dans l'app, les changements seront reportés sur le container.
+
+Ajouter une route dans express puis tester.
+
+Ça ne fonctionne pas. Ici le problème ne vient pas de docker mais de node, celui-ci a besoin d'être relancer pour que ces changements soient effectifs. 
+
+Installer nodemon dans l'app et mettre à jour le package.json
+
+Pour que Docker prenne en compte ce nouveau mode de lancement de node, il faut modifier le Dockerfile.
+
+```
+ENTRYPOINT ["npm", "start"]
+```
+
+Rebuild le container et relance le. La route faite tout à l'heure doit fonctionner, mais nous avons relancé docker donc ca ne veut pas dire que ce qu'on vient de faire fonctionne. Créé une autre route et teste là. Bingo !
+
+## Step 3 db
+* Installer et connecter Mysql
