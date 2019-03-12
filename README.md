@@ -80,12 +80,13 @@ docker rm <id>
 
 ## Step 2 
 * Mise à jour de l'app
-
-Après une mise à jour de l'app, les changements ne sont pas reportés sur le container. Pour cela il faut :
   * Stopper le container
   * Retirer le container
   * Recréer l'image
   * Lancer le container à nouveau
+
+
+Après une mise à jour de l'app, les changements ne sont pas reportés sur le container. Les commandes ci-dessus permettent de le mettre à jour.
 
 Tout d'abord pour ne plus s'embêter à récupérer l'id du container, nous allons lui donner un nom avec la balise --name
 
@@ -102,3 +103,33 @@ docker stop my-container && docker rm my-container && docker build -t uxrepublic
 C'est bien mais pas top, Ca fait beaucoup de commandes pour mettre à jour le container. On peut faire mieux...avec un volume. 
 
 * Créer et gérer un Volume
+
+```
+docker volume create [nom du volume]
+```
+
+Pour vérifier que le volume a bien été créé :
+
+```
+docker volume ls
+```
+
+Vous aurez l'occasion de créer un certain nombre de volumes. Pour supprimé tous ceux non utilisés :
+
+```
+docker volume prune
+```
+
+Pour en retirer un seul connu il suffit de lancer la commande suivante :
+
+```
+docker volume rm [nom du volume]
+```
+
+Pour voir davantage d'infos sur un volume, notamment où il place les fichiers persistés, lancer la commande ci-dessous. Le champs Mountpoint permet de connaître le placement de ces fichiers.
+
+```
+docker inspect [nom du volume]
+```
+
+* Monter un volume
