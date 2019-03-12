@@ -160,3 +160,16 @@ Le volume se trouve ici : ../monVol/
 Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans notre volume sera persisté, le reste sera supprimé. 
 
 * Monter un sous-répertoire en tant que volume
+
+On peut utiliser un répertoire en tant que volume avec Docker. Pour cela nous allons créer un fichier dans un nouveau repertoire : /logs/logs.txt que l'on initialize avec un texte.
+
+```
+docker run -d -p 8000:3000 --name my-other-container --volume $(pwd)/logs:/logs uxrepublic/node
+```
+
+Ici $(pwd)/logs indique que l'on va utiliser ce repertoire en tant que source pour le volume et que l'on va retrouver son contenu dans /logs dans le volume. Autrement dit, on monte le repertoire logs de notre dossier actuel dans un repertoire qui s'appelle logs dans le volume.
+
+En lancant une commande bash sur le container on peut retrouver ce que l'on avait mis dans logs.txt.
+Si on modifie le fichier sur notre ordinateur, il s'en retrouve modifié dans le volume.
+
+* Considérer une app comme un volume
