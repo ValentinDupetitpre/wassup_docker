@@ -133,3 +133,30 @@ docker inspect [nom du volume]
 ```
 
 * Monter un volume
+
+Pour monter un volume, nous avons deux possibilités : avec --mount ou --volume (-v). Leur syntax ci-dessous:
+
+```
+-v [name of volume]:[directory in the container]
+-mount source=[name of volume],target=[directory in container]
+```
+
+On test la commande en lancant notre container
+
+```
+docker run -d -p 8000:3000 --name my-container --volume monVol:/monVol uxrepublic/node
+```
+
+En faisant un docker inspect my-container on obtient un JSON. Notre volume a bien été monté dans le container, on peut le vérifier dans la propriété "Mounts"
+
+On peut vérifier où est le volume dans notre container.
+
+```
+docker exec -it my-container bash
+```
+
+Le volume se trouve ici : ../monVol/
+
+Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans notre volume sera persisté, le reste sera supprimé. 
+
+* Monter un sous-répertoire en tant que volume
