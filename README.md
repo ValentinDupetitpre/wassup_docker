@@ -219,3 +219,27 @@ show tables;
 Votre table a bien été créée. Passons à la suite.
 
 * Mysql en Image Docker 
+
+2 possibilités pour intégrer mysql à docker. Soit dans l'app, soit dans un container différent. En fonction de votre besoin vous choisirez l'une ou l'autre de ces solutions. 
+
+Nous allons commencer avec la solution où Mysql est seul dans un container. 
+
+```
+docker run --name=mysql-db mysql
+```
+
+Oups, des erreurs : la bdd n'est pas initialisée, nous avons oublié d'indiquer l'option password.
+
+```
+docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d -p 8000:3306 mysql
+```
+
+Avec un docker ps on voit que l'on peut accéder à la base de donnée via 0.0.0.0:8001
+
+```
+mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8001
+```
+
+C'est connecté. Bravo. Mais..peut-on atteindre un container depuis un autre ? Pour ce faire on a besoin de lier les deux. Nous verrons ça plus tard.
+
+* Connecter Node a Mysql
