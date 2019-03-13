@@ -334,3 +334,19 @@ docker logs my-container
 Si vous voyez apparaitre "Connected to mysql!" C'est que c'est bon. C'est le console log dans le callback de connexion de la bdd. Bravo
 
 * Connecter des Containers différemment
+
+Nous venons de lier des containers avec de l'héritage. On peut le faire d'une autre manière, en créant des réseaux ou des 'custom bridge network' entre les containers. Il s'agit de créer un réseau auquel font partie des containers. 
+
+NB : Un container peut faire partie de plusieurs réseaux
+
+```
+docker network create --driver bridge isolated_network
+
+docker run -d -p 8000:3000 --net isolated_network --name my-container uxrepublic/node
+
+docker run -p 8001:3306 --net isolated_network --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d mysql
+```
+
+Comme vous pouvez le voir, il suffit de rajouter le tag --net [name of network] pour intégrer le container au réseau. 
+
+* Gestion de la base de données
