@@ -293,3 +293,44 @@ Mysql possède un plugin mysql_native_password qui implémente une authentificat
 La bibliothèque mysql de node est en retard sur Mysql 8 qui est passée à un nouveau système d'authentification pluggable. Donc soit vous choisissez de pull une version antérieure de MySql soit de revenir à l'authentification native.
 
 * Connecter des Containers
+
+Pour commencer il faut tuer et supprimer le container my-container sur lequel on a travaillé jusqu'ici. Ensuite on modifie le fichier app.js 
+
+```
+const con = mysql.createConnection({
+    host: "mysql",
+    user: "root",
+    password: "complexpassword",
+    database: 'Customer'
+});
+
+con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected to mysql!");
+});
+```
+Il faut builder à nouveau notre container puis lancer la commande suivante :
+
+```
+docker run -d -p 8000:3000 --name my-container --link mysql-db:mysql uxrepublic/node
+```
+
+Que fait-on ? 
+
+On créé un container qui s'appelle 'my-container'. 
+
+Avec --link nous lions notre container my-container avec le container mysql-db. 
+
+L'alias mysql dans la deuxieme partie du --link est le nom que nous retrouvons comme host dans notre base de données de app.js
+
+De plus, nous avons modifié l'host pour matcher avec la commande link et supprimé la partie port dans notre conf de bdd. La liaison entre les deux containers gère le port elle-même.
+
+Vérifions si les deux containers sont bien connectés : 
+
+```
+docker logs my-container
+```
+
+Si vous voyez apparaitre "Connected to mysql!" C'est que c'est bon. C'est le console log dans le callback de connexion de la bdd. Bravo
+
+* Connecter des Containers différemment
