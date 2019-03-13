@@ -231,7 +231,7 @@ docker run --name=mysql-db mysql
 Oups, des erreurs : la bdd n'est pas initialisée, nous avons oublié d'indiquer l'option password.
 
 ```
-docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d -p 8000:3306 mysql
+docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d -p 8001:3306 mysql
 ```
 
 Avec un docker ps on voit que l'on peut accéder à la base de donnée via 0.0.0.0:8001
@@ -243,3 +243,53 @@ mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8001
 C'est connecté. Bravo. Mais..peut-on atteindre un container depuis un autre ? Pour ce faire on a besoin de lier les deux. Nous verrons ça plus tard.
 
 * Connecter Node a Mysql
+
+Maintenant essayons de connecter node à un container mysql. 
+
+```
+npm install mysql
+```
+
+Puis ajouter dans le fichier app.js :
+
+```
+const mysql = require('mysql');
+const con = mysql.createConnection({
+    host: "localhost",
+    port: 8001,
+    user: "root",
+    password: "complexpassword",
+    database: 'Customer'
+});
+
+con.connect(function (err) {
+
+if (err) throw err;
+ console.log("Connected!");
+});
+```
+
+Si on lance 
+
+```
+node app.js
+```
+
+Erreur :( C'est parce que caching_sha2_password arrive dans Mysql 8.0 et la version de node n'implémente pas encore ce qu'il faut pour s'authentifier. On peut passer outre ce problème avec ces lignes de commandes :
+
+```
+mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8001
+```
+
+```
+mysql> ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'complexpassword';
+mysql> FLUSH PRIVILEGES;
+```
+
+Si on réessaye de lancer node app.js, plus de problèmes, ça fonctionne ! 
+
+Mysql possède un plugin mysql_native_password qui implémente une authentification en natif, c'est-à-dire l'authentification basée sur la méthode de hachage de mots de passe utilisée avant l'introduction d'authentification pluggable. 
+
+La bibliothèque mysql de node est en retard sur Mysql 8 qui est passée à un nouveau système d'authentification pluggable. Donc soit vous choisissez de pull une version antérieure de MySql soit de revenir à l'authentification native.
+
+* Connecter des Containers
