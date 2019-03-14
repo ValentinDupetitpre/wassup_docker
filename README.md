@@ -132,4 +132,4 @@ Pour voir davantage d'infos sur un volume, notamment où il place les fichiers p
 docker inspect [nom du volume]
 ```
 
-* Monter un volume
+### Monter un volume
