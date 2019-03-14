@@ -350,3 +350,10 @@ docker run -p 8001:3306 --net isolated_network --name mysql-db -e MYSQL_ROOT_PAS
 Comme vous pouvez le voir, il suffit de rajouter le tag --net [name of network] pour intégrer le container au réseau. 
 
 * Gestion de la base de données
+
+  * Le fichier de structure de la base de données doit être lancé à un moment donné. Soit on se connecte avec le client mysql et on indique l'emplacement du fichier sur l'ordinateur hôte. Soit on place ce fichier dans l'app et on laisse le Dockerfile l'ajouter au container. Sinon il peut être intéressant d'utiliser les bibliothèques Sequelize ou Knex qui supportent bien les migrations et spécifier la structure de la base de données.
+  * Le fichier de jeu de données de la base de données peut être traité de la même manière que le fichier de structure. Il doit être appelé une fois la structure appliquée et ne doit être appelé qu'une fois. Il est souvent recommendé de rajouter des données à la main, en se connectant à mysql et appelant le fichier de jeu de données.
+
+## Step 4 Docker compose
+
+* Pourquoi Docker compose
