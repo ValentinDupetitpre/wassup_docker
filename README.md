@@ -3,8 +3,8 @@
 https://runnable.com/docker/install-docker-on-macos
 
 ## Step 1 
-* Créer un environnement node Express
-* Créer un Dockerfile
+### Créer un environnement node Express
+### Créer un Dockerfile
   * FROM, this is us selecting an OS image from Docker Hub. Docker Hub is a global repository that contains images that we can pull down locally. In our case we are choosing an image based on Ubuntu that has Node.js installed, it’s called node. We also specify that we want the latest version of it, by using the following tag :latest
   * WORKDIR, this simply means we set a working directory. This is a way to set up for what is to happen later, in the next command below
   * COPY, here we copy the files from the directory we are standing into the directory specified by our WORKDIR command
@@ -12,7 +12,7 @@ https://runnable.com/docker/install-docker-on-macos
   * EXPOSE, this means we are opening up a port, it is through this port that we communicate with our container
   * ENTRYPOINT, this is where we should state how we start up our application, the commands need to be specified as an array so the array [“node”, “app.js”] will be translated to the node app.js in the terminal
 
-* Créer une image
+### Créer une image
 ```
 docker build -t uxrepublic/node:latest .
 ```
@@ -24,7 +24,7 @@ Dans le terminal vous pouvez observer que l'image de l'OS (node:latest) est tél
 docker images
 ```
 Permet de voir l'image que l'on vient de créer
-* Créer un container
+### Créer un container
 ```
 docker run uxrepublic/node
 ```
@@ -45,15 +45,15 @@ Pour accéder à son docker on lance donc la commande suivante et on se connecte
 docker run -p 8000:3000 uxrepublic/node
 ```
 
-* Ajouter des variables d'environnement
+### Ajouter des variables d'environnement
 
 On a ajouté une variable d'environnement dans le Dockerfile pour le PORT. On utilise le $ pour appeler une variable dans ce fichier.
 
-* Lire les variables d'environnement dans App.js
+### Lire les variables d'environnement dans App.js
 
 Depuis Node, on peut lire les variables d'environnement grâce à process.env.PORT
 
-* Gestion du container
+### Gestion du container
   * Mode Deamon - Rajouter -d au docker run pour voir l'id du container lancé. C'est plus simple s'il faut l'arrêter. Avec ce mode, le container est lancé en arrière-plan et aucun output n'apparait dans la console.
   * Mode Interactif - Ce mode permet de 'rentrer' dans le container qui fonctionne et effectuer des commandes bash par exemple. Pour cela il faut lancer la commande suivante.
  ```
@@ -79,7 +79,7 @@ docker rm <id>
 ```
 
 ## Step 2 
-* Mise à jour de l'app
+### Mise à jour de l'app
   * Stopper le container
   * Retirer le container
   * Recréer l'image
@@ -102,7 +102,7 @@ docker stop my-container && docker rm my-container && docker build -t uxrepublic
 
 C'est bien mais pas top, Ca fait beaucoup de commandes pour mettre à jour le container. On peut faire mieux...avec un volume. 
 
-* Créer et gérer un Volume
+### Créer et gérer un Volume
 
 ```
 docker volume create [nom du volume]
@@ -132,7 +132,7 @@ Pour voir davantage d'infos sur un volume, notamment où il place les fichiers p
 docker inspect [nom du volume]
 ```
 
-* Monter un volume
+### Monter un volume
 
 Pour monter un volume, nous avons deux possibilités : avec --mount ou --volume (-v). Leur syntax ci-dessous:
 
@@ -159,7 +159,7 @@ Le volume se trouve ici : ../monVol/
 
 Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans notre volume sera persisté, le reste sera supprimé. 
 
-* Monter un sous-répertoire en tant que volume
+### Monter un sous-répertoire en tant que volume
 
 On peut utiliser un répertoire en tant que volume avec Docker. Pour cela nous allons créer un fichier dans un nouveau repertoire : /test/logs.txt que l'on initialize avec un texte.
 
@@ -172,7 +172,7 @@ Ici $(pwd)/test indique que l'on va utiliser ce repertoire en tant que source po
 En lancant une commande bash sur le container on peut retrouver ce que l'on avait mis dans logs.txt.
 Si on modifie le fichier sur notre ordinateur, il s'en retrouve modifié dans le volume.
 
-* Considérer une app comme un volume
+### Considérer une app comme un volume
 
 Pour commencer on kill et supprime le container que l'on vient de faire. Puis on relance le container avec un volume différent : --volume $(pwd):/app : 
 
@@ -197,7 +197,7 @@ ENTRYPOINT ["npm", "start"]
 Rebuild le container et relance le. La route faite tout à l'heure doit fonctionner, mais nous avons relancé docker donc ca ne veut pas dire que ce qu'on vient de faire fonctionne. Créé une autre route et teste là. Bingo !
 
 ## Step 3 db
-* Installer et connecter Mysql
+### Installer et connecter Mysql
 
 Sur mac (pour les autres os : télécharger un exec) : 
 ```
@@ -218,7 +218,7 @@ show tables;
 
 Votre table a bien été créée. Passons à la suite.
 
-* Mysql en Image Docker 
+### Mysql en Image Docker 
 
 2 possibilités pour intégrer mysql à docker. Soit dans l'app, soit dans un container différent. En fonction de votre besoin vous choisirez l'une ou l'autre de ces solutions. 
 
@@ -231,7 +231,7 @@ docker run --name=mysql-db mysql
 Oups, des erreurs : la bdd n'est pas initialisée, nous avons oublié d'indiquer l'option password.
 
 ```
-docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d -p 8001:3306 mysql
+docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=complexpassword -d -p 8000:3306 mysql
 ```
 
 Avec un docker ps on voit que l'on peut accéder à la base de donnée via 0.0.0.0:8001
@@ -242,7 +242,7 @@ mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8001
 
 C'est connecté. Bravo. Mais..peut-on atteindre un container depuis un autre ? Pour ce faire on a besoin de lier les deux. Nous verrons ça plus tard.
 
-* Connecter Node a Mysql
+### Connecter Node a Mysql
 
 Maintenant essayons de connecter node à un container mysql. 
 
@@ -292,7 +292,7 @@ Mysql possède un plugin mysql_native_password qui implémente une authentificat
 
 La bibliothèque mysql de node est en retard sur Mysql 8 qui est passée à un nouveau système d'authentification pluggable. Donc soit vous choisissez de pull une version antérieure de MySql soit de revenir à l'authentification native.
 
-* Connecter des Containers
+### Connecter des Containers
 
 Pour commencer il faut tuer et supprimer le container my-container sur lequel on a travaillé jusqu'ici. Ensuite on modifie le fichier app.js 
 
@@ -333,7 +333,7 @@ docker logs my-container
 
 Si vous voyez apparaitre "Connected to mysql!" C'est que c'est bon. C'est le console log dans le callback de connexion de la bdd. Bravo
 
-* Connecter des Containers différemment
+### Connecter des Containers différemment
 
 Nous venons de lier des containers avec de l'héritage. On peut le faire d'une autre manière, en créant des réseaux ou des 'custom bridge network' entre les containers. Il s'agit de créer un réseau auquel font partie des containers. 
 
@@ -349,11 +349,27 @@ docker run -p 8001:3306 --net isolated_network --name mysql-db -e MYSQL_ROOT_PAS
 
 Comme vous pouvez le voir, il suffit de rajouter le tag --net [name of network] pour intégrer le container au réseau. 
 
-* Gestion de la base de données
+### Gestion de la base de données
 
   * Le fichier de structure de la base de données doit être lancé à un moment donné. Soit on se connecte avec le client mysql et on indique l'emplacement du fichier sur l'ordinateur hôte. Soit on place ce fichier dans l'app et on laisse le Dockerfile l'ajouter au container. Sinon il peut être intéressant d'utiliser les bibliothèques Sequelize ou Knex qui supportent bien les migrations et spécifier la structure de la base de données.
   * Le fichier de jeu de données de la base de données peut être traité de la même manière que le fichier de structure. Il doit être appelé une fois la structure appliquée et ne doit être appelé qu'une fois. Il est souvent recommendé de rajouter des données à la main, en se connectant à mysql et appelant le fichier de jeu de données.
 
 ## Step 4 Docker compose
 
-* Pourquoi Docker compose
+### Pourquoi Docker compose
+
+Docker compose va être utilisé lorsque nous aurons besoin de gérer des micro-services.
+Une architecture en micro-services c'est :
+* **À couplage faible** : chaque service n'est pas dépendant d'un autre. Les données dont ils ont besoin sont disponibles et ils peuvent communiquer entre eux en appelant leur API.
+* **Déployable indépendamment** : on peut lancer, stopper, rebuilder un service sans affecter les autres. 
+* **Fortement maintenable et testable** : les services sont petits et donc peu compliqués. Comme ils ne dépendent pas d'autres services, ceux-ci sont plus facilement testables.
+* **Organisés autour de problématiques métier** : les services sont organisés autour de thèmes.
+
+Cette architecture est flexible car sans (ou peu d') inter-dépendances. Il est intéressant d'utiliser les microservices plutôt qu'une architecture "monolithique" dans ces différents cas :
+* l'utilisation de différentes stack ou des pocs sur des technos nouvelles. 
+* la réutilisation de certains micro-services pour plusieurs projets différents par exemple.
+* Impact minimal suite à un micro-service down. Les autres micro-services restent fonctionnels, contrairement à une application monolithique.
+
+Docker va être une très bonne solution pour une architecture en micro-service on containerisant chaque micro-service. Docker compose va nous simplifier les choses car il nous permettra de gérer plusieurs containers. Sinon les lignes de commandes vont devenir très longues pour gérer de nombreux containers.
+
+### Fonctionnalités de Docker compose
