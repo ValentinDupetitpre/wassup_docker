@@ -407,3 +407,48 @@ Tout va se passer dans le docker-compose.yaml, on y définit tous les services d
 * **Volumes**, on peut définir des volumes.
 
 ### Docker compose en pratique
+
+Pour commencer nous allons préparer le projet test. Créez deux dossiers (product-service et inventory-service) dans lesquels vous créez un projet (app.js + package.json + Dockerfile). Comme au début de l'atelier, un fichier simple qui renvoie un message sur sa route principale. (où récupérez mes fichiers sur github). 
+
+Une fois cela fait, à la racine du projet (au même niveau que les deux dossiers), créer un docker-compose.yaml.
+
+```
+version: '3'
+services:
+  product-service:
+    build:
+      context: ./product-service
+    ports:
+      - "8000:3000"
+```
+
+Qu'avons nous fait ?
+* version : il est important d'indiquer la version. Docker supporte 3 version majeures différentes. Elles n'ont pas toutes les mêmes fonctionnalités ou les mêmes syntaxes.
+* services : il ne doit y avoir qu'un seul mot-clé services dans le docker-compose.yaml.
+* product-service : c'est le nom que l'on a choisi pour notre service. 
+* build : on indique à Docker-compose comment builder l'image. Si nous avons une image prête, nous n'avons pas besoin de ce mot-clé.
+* context : c'est pour indiquer à docker compose où se trouve le Dockerfile.
+* ports : le port. Nous indiquons quel port externe à matcher avec quel port interne.
+
+Docker-compose est maintenant prêt à être utilisé pour le service product-service.
+
+```
+docker-compose build
+```
+
+Notre image est buildée. Si on regarde les images docker, celle qui vient d'être créée porte comme nom [nom du repertoire courant]_[nom du service]. Pour lancer le container :
+
+```
+docker-compose up -d
+```
+
+Le container est lancé et fonctionne, on peut aller voir sur le localhost:8000 pour vérifier.
+
+```
+docker-compose down
+docker-compose stop
+```
+
+La commande down stop et supprime le container. La commande stop le stop uniquement. On sait maintenant utiliser basiquement docker compose.
+
+### Docker compose recap
