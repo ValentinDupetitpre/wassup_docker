@@ -463,3 +463,34 @@ Docker compose prend en charge la totalité du cycle de vie des services. Liston
 Ce qui est très intéressant c'est de continuer à augmenter la taille de notre application.
 
 ### Application sur l'application complète
+
+On va modifier le docker-compose.yaml pour intégrer notre deuxieme application :
+
+```
+version: '3'
+services: 
+  product-service:
+    build: 
+      context: ./product-service
+    ports:
+      - "8000:3000"
+  inventory-service: 
+    build:
+      context: ./inventory-service
+    ports:
+      - "8001:3000"
+```
+
+On peut ensuite lancer la commande 
+
+```
+docker-compose up
+```
+
+Pas besoind de lancer un build, ici la commande up s'en charge, build l'image, créer et lance les containers.
+
+Attention, ceci fonctionne bien pour un premier lancement de l'application quand aucune image n'existe encore. Si on change un service, il faut rebuilder le projet, donc lancer un 'docker-compose build' puis lancer 'docker-compose up'.
+
+## Step 5 - Docker compose suite
+
+### Variables d'environnement
