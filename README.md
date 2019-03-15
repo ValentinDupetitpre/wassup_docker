@@ -452,3 +452,14 @@ docker-compose stop
 La commande down stop et supprime le container. La commande stop le stop uniquement. On sait maintenant utiliser basiquement docker compose.
 
 ### Docker compose recap
+
+Docker compose prend en charge la totalité du cycle de vie des services. Listons les commandes Docker les plus utilisées et leur correspondance avec docker-compose.
+
+* *docker build* devient *docker-compose build*. Docker-compose peut builder tous les services specifés dans le docker-compose.yaml. Nous pouvons lui indiquer de builder une seule image si nous le souhaitons.
+* *docker build + docker run* devient *docker-compose up*. Si les images ne sont pas buildées il le fait et lance les containers.
+* *docker stop* devient *docker-compose stop*. Ici encore on peut stopper tous les containers ou un seul.
+* *docker stop && docker rm* devient *docker-compose down*. Éteint et supprime le container pour repartir de zéro après.
+
+Ce qui est très intéressant c'est de continuer à augmenter la taille de notre application.
+
+### Application sur l'application complète
