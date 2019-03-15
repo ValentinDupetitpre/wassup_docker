@@ -382,3 +382,28 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 * Executer une commande unique sur un service
 
 ### Quand Docker seul n'est plus suffisant
+
+Avec dockeriser quelque chose avec Docker il faut :
+* Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
+* Builder une image ou puller une image existente de Docker Hub.
+* Créer et lancer un container.
+
+Pour un service on lancera au moins ces deux commandes : 
+
+```
+docker build -t some-image-name .
+docker run -d -p 8000:3000 --name some-container-name some-image-name
+```
+Pour trois services ça donne 6 commandes à lancer. Ca peut vite devenir très lourd.
+
+**Avec Docker Compose** on a toujours besoin du Dockerfile mais il va gérer lui-même le build des images et la gestion des containers.
+
+Tout va se passer dans le docker-compose.yaml, on y définit tous les services d'un projet. On peut y configurer tout cela :
+* **Build**, on peut spécifier le contexte du build et le nom du Dockerfile
+* **Environnement**, on peut définir et dnner des valeurs à des variables d'environnement
+* **Image**, au lieu de créer les images 'from-scratch', on peut définir des images préparées que l'on veut puller du Docker Hub.
+* **Networks**, on peut créer des réseaux, ponts et nous pouvons également indiquer pour chaque service, à quel réseau il appartient.
+* **Ports**, on peut définir le port quel port externe doit matcher quel port interne au container.
+* **Volumes**, on peut définir des volumes.
+
+### Docker compose en pratique
