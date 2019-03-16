@@ -487,10 +487,14 @@ On peut ensuite lancer la commande
 docker-compose up
 ```
 
-Pas besoind de lancer un build, ici la commande up s'en charge, build l'image, créer et lance les containers.
+Pas besoin de lancer un build, ici la commande up s'en charge, build l'image, créer et lance les containers.
 
 Attention, ceci fonctionne bien pour un premier lancement de l'application quand aucune image n'existe encore. Si on change un service, il faut rebuilder le projet, donc lancer un 'docker-compose build' puis lancer 'docker-compose up'.
 
 ## Step 5 - Docker compose suite
 
 ### Variables d'environnement
+
+
+
+### Volumes - Créer un espace persistant
