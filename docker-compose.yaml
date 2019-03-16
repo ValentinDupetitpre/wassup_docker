@@ -5,6 +5,8 @@ services:
       context: ./product-service
     ports:
       - "8000:3000"
+    environment:
+      - test=testvalue
   inventory-service: 
     build:
       context: ./inventory-service
