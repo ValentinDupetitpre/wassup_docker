@@ -495,6 +495,32 @@ Attention, ceci fonctionne bien pour un premier lancement de l'application quand
 
 ### Variables d'environnement
 
+On a déjà vu comment définir des variables d'environnement dans le Dockerfile. Mais on peut également les définir en ligne de commandes ou encore dans le docker-compose.yaml.
 
+```
+version: '3'
+services:
+ product-service:
+   build:
+     context: ./product-service
+   ports:
+     - "8000:3000"
+   environment:  
+     - test=testvalue 
+ inventory-service:
+   build:
+     context: ./inventory-service
+   ports:
+   - "8001:3000"
+```
+
+On vient de créer une variable d'environnement test avec pour valeur testvalue. On peut vérifier que la variable d'environnement est créée en lançant les commandes suivantes :
+
+```
+docker-compose ps
+docker exec wassupdocker_product-service_1 env
+```
+
+On doit retrouver le variable test avec sa valeur dans les résultats.
 
 ### Volumes - Créer un espace persistant
