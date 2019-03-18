@@ -12,3 +12,9 @@ services:
       context: ./inventory-service
     ports:
       - "8001:3000"
+    volumes:
+      - my-volume:/var/lib/data
+
+volumes:  
+  my-volume:
+      

@@ -524,3 +524,33 @@ docker exec wassupdocker_product-service_1 env
 On doit retrouver le variable test avec sa valeur dans les résultats.
 
 ### Volumes - Créer un espace persistant
+
+On modifie le docker-compose.yaml:
+
+```
+version: '3'
+services: 
+  product-service:
+    build: 
+      context: ./product-service
+    ports:
+      - "8000:3000"
+    environment:
+      - test=testvalue
+  inventory-service: 
+    build:
+      context: ./inventory-service
+    ports:
+      - "8001:3000"
+    volumes:
+      - my-volume:/var/lib/data
+
+volumes:  
+  my-volume:
+```
+
+Ici, on créé un volume qui s'appelle "my-volume" en bas du fichier. On l'appelle dans inventory-service et on le map avec /var/lib/data. C'est un repertoire dans le volume qui sera persisté lorsque le container sera éteint ou supprimé. On peut vérifier en lancant une commande bash sur le bon container et en créant un fichier (ici persist.log) avec une valeur dedans.
+
+Maintenant nous pouvons inspecter notre volume et observer le champs 'Mountpoint'. On peut éteindre et supprimer notre container puis le relancer pour vérifier si notre fichier est bien persisté. Il est toujours là !
+
+### Volumes - Répertoire courant comme volume
