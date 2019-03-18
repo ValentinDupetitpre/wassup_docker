@@ -554,3 +554,40 @@ Ici, on créé un volume qui s'appelle "my-volume" en bas du fichier. On l'appel
 Maintenant nous pouvons inspecter notre volume et observer le champs 'Mountpoint'. On peut éteindre et supprimer notre container puis le relancer pour vérifier si notre fichier est bien persisté. Il est toujours là !
 
 ### Volumes - Répertoire courant comme volume
+
+Pour utiliser un répertoire comme volume, il faut modifier le docker-compose.yaml :
+
+```
+version: '3'
+services: 
+  product-service:
+    build: 
+      context: ./product-service
+    ports:
+      - "8000:3000"
+    environment:
+      - test=testvalue
+    volumes:
+      - type: bind
+      source: ./product-service
+      target: /app
+  inventory-service: 
+    build:
+      context: ./inventory-service
+    ports:
+      - "8001:3000"
+    volumes:
+      - my-volume:/var/lib/data
+
+volumes:  
+  my-volume:
+```
+
+Nous avons ajouté :
+* type: bind. Cela créé ce qu'on appelle un bind-mount. Un genre de volume qui sert principalement à synchroniser des fichiers entre l'ordinateur hôte et le container.
+* source. Le répertoire que l'on souhaite synchroniser.
+* target. Le répertoire dans le container qui est synchronisé avec la source.
+
+Si nous modifions un fichier dans la source, le changement sera répercuté dans target.
+
+### Ajout d'une base de données

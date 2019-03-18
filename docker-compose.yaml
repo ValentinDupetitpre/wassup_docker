@@ -7,6 +7,10 @@ services:
       - "8000:3000"
     environment:
       - test=testvalue
+    volumes:
+      - type: bind
+      source: ./product-service
+      target: /app
   inventory-service: 
     build:
       context: ./inventory-service
@@ -17,4 +21,3 @@ services:
 
 volumes:  
   my-volume:
-      
