@@ -18,6 +18,12 @@ services:
       - "8001:3000"
     volumes:
       - my-volume:/var/lib/data
+  product-db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=complexpassword
+    ports:
+      - 8002:3306
 
 volumes:  
   my-volume:
