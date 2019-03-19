@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services: 
   product-service:
     build: 
@@ -9,8 +9,8 @@ services:
       - test=testvalue
     volumes:
       - type: bind
-      source: ./product-service
-      target: /app
+        source: ./product-service
+        target: /app
   inventory-service: 
     build:
       context: ./inventory-service

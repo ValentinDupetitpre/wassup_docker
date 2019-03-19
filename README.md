@@ -558,7 +558,7 @@ Maintenant nous pouvons inspecter notre volume et observer le champs 'Mountpoint
 Pour utiliser un répertoire comme volume, il faut modifier le docker-compose.yaml :
 
 ```
-version: '3'
+version: '3.2'
 services: 
   product-service:
     build: 
@@ -588,6 +588,7 @@ Nous avons ajouté :
 * source. Le répertoire que l'on souhaite synchroniser.
 * target. Le répertoire dans le container qui est synchronisé avec la source.
 
+Nous avons mis à jour la version du Dockerfile pour utiliser le volume en bind. On peut vérifier que le contenu du dossier product-service se trouve dans le dossier app du container correspondant à product-service.
 Si nous modifions un fichier dans la source, le changement sera répercuté dans target.
 
 ### Ajout d'une base de données
