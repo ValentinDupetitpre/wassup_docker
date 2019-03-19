@@ -592,3 +592,52 @@ Nous avons mis à jour la version du Dockerfile pour utiliser le volume en bind.
 Si nous modifions un fichier dans la source, le changement sera répercuté dans target.
 
 ### Ajout d'une base de données
+
+Nous allons rajouter un service de base de données Mysql dans le docker-compose.yaml.
+
+```
+version: '3.2'
+services: 
+  product-service:
+    build: 
+      context: ./product-service
+    ports:
+      - "8000:3000"
+    environment:
+      - test=testvalue
+    volumes:
+      - type: bind
+        source: ./product-service
+        target: /app
+  inventory-service: 
+    build:
+      context: ./inventory-service
+    ports:
+      - "8001:3000"
+    volumes:
+      - my-volume:/var/lib/data
+  product-db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=complexpassword
+    ports:
+      - 8002:3306
+
+volumes:  
+  my-volume:
+```
+
+* **product-db** est le nom de notre nouveau service.
+* **image** permet de remplacer le mot-clé 'build' lorsque nous avons une image déjà buildée, ce qui est souvent le cas pour les bases de données.
+* **environment**, de nombreuses BDD ont besoin d'un certain nombre de paramètre pour pouvoir s'y connecter (username, password...). Ici nous lui passons la variable MYSQL_ROOT_PASSWORD pour lui indiquer quel est le mot de passe root.
+* **ports**, comme pour les autres services on match le 8002 sur la machine avec le 3306 dans le container.
+
+On lance docker, on vérifie les process qui tournent. La BDD est bien là, on peut vérifier si on arrive à s'y connecter :
+
+```
+mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8002
+```
+
+Connecté ! 
+
+### Connection à la base de données
