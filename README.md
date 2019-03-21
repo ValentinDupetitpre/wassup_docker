@@ -815,3 +815,21 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 Nous avons créé une fonction connect() qui créé une connexion avec createConnection(), qui prend en argument : hote, user, password, database. Le timeout sert à se reconnecter après 30s s'il y a eu une erreur auparavant. On utilise conn.on('error') car on peut 'perdre' la connexion. On réessaye donc de se connecter. 
 
 ### Configuration de la base de données
+
+On a dit qu'on pouvait récupérer une image prête de base de donnée du Docker Hub. Ici nous créons un Dockerfile dans le dossier à builder car au delà de choisir la base de données, nous pouvons lancer des commandes qui permettent par exemple de créer la structure de la base de données et de la pré-remplir. Le Dockerfile est le suivant :
+
+```
+FROM mysql:5.6
+
+ADD init.sql /docker-entrypoint-initdb.d
+```
+
+On execute un script qui s'appelle init.sql que voici :
+
+```
+CREATE DATABASE IF NOT EXISTS Products;
+```
+
+Le script est basique mais nous pourrions le compléter aisément. 
+
+Nous avons maintenant notre application fonctionnelle. Un container communique avec la base de données. A vous de jouer pour continuer ce projet comme vous l'entendez maintenant que vous avez les bases de Docker.
