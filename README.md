@@ -825,3 +825,21 @@ Dans le docker-compose.yaml on build un dossier /product-db. Il contient ceci :
 Vous pouvez récupérer les données de ces fichiers sur github. Nous les expliquerons plus tard.
 
 ### Configuration de la base de données
+
+On a dit qu'on pouvait récupérer une image prête de base de donnée du Docker Hub. Ici nous créons un Dockerfile dans le dossier à builder car au delà de choisir la base de données, nous pouvons lancer des commandes qui permettent par exemple de créer la structure de la base de données et de la pré-remplir. Le Dockerfile est le suivant :
+
+```
+FROM mysql:5.6
+
+ADD init.sql /docker-entrypoint-initdb.d
+```
+
+On execute un script qui s'appelle init.sql que voici :
+
+```
+CREATE DATABASE IF NOT EXISTS Products;
+```
+
+Le script est basique mais nous pourrions le compléter aisément. 
+
+Nous avons maintenant notre application fonctionnelle. Un container communique avec la base de données. A vous de jouer pour continuer ce projet comme vous l'entendez maintenant que vous avez les bases de Docker.
