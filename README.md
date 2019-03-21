@@ -825,4 +825,3 @@ Dans le docker-compose.yaml on build un dossier /product-db. Il contient ceci :
 Vous pouvez récupérer les données de ces fichiers sur github. Nous les expliquerons plus tard.
 
 ### Configuration de la base de données
-
