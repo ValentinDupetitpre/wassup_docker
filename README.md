@@ -814,4 +814,14 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 Nous avons créé une fonction connect() qui créé une connexion avec createConnection(), qui prend en argument : hote, user, password, database. Le timeout sert à se reconnecter après 30s s'il y a eu une erreur auparavant. On utilise conn.on('error') car on peut 'perdre' la connexion. On réessaye donc de se connecter. 
 
+Dans le docker-compose.yaml on build un dossier /product-db. Il contient ceci : 
+
+```
+/product-db
+  Dockerfile
+  init.sql
+```
+
+Vous pouvez récupérer les données de ces fichiers sur github. Nous les expliquerons plus tard.
+
 ### Configuration de la base de données
