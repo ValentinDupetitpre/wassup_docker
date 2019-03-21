@@ -640,4 +640,178 @@ mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8002
 
 Connecté ! 
 
-### Connection à la base de données
+### Connexion à la base de données
+
+Les 3 principales méthodes de connexion à la base de données :
+* utiliser un client docker (mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8002)
+* entrer dans notre container en bash puis taper 'mysql'
+* se connecter à travers l'application en utilisant la bibliothèque NPM mysql. La BDD et l'application seront donc dans différents containers. Pour les connecter, il faut :
+  * qu'ils soient **sur le même réseau**.
+  * la **BDD doit être prête**. C'est relativement long de démarrer la BDD et pour que l'app puisse échanger avec la BDD il faut que celle-ci soit bien démarrée.
+  * **créer un objet de connexion**. Il faut s'assurer que l'on a bien un objet de connexion dans app.js pour product-service.
+
+On commence par créer un réseau pour connecter les containers. On peut ajouter ces lignes à le fin du docker-compose.yaml :
+
+```
+networks:
+  products:
+```
+
+Puis on lie les services à ce réseau :
+
+```
+services:
+  some-service:
+    networks:  
+      - products
+```
+
+Maintenant on doit s'assurer que la BDD est lancée avant de lancer notre container qui l'utilise. On peut utiliser 'depends_on' pour ça :
+
+```
+services:
+ some-service:
+   depends_on: db
+ db:
+   image: mysql
+```
+
+Maintenant on veut être sûr que notre BDD est lancée correctement avant de s'y connecter. S'il y a une(des) erreur(s), on ne veut pas s'y connecter. Pour savoir quand elle est prête on peut utiliser des script proposés par docker :
+* [wait-for-it](https://github.com/vishnubob/wait-for-it)
+* [dockerise](https://github.com/jwilder/dockerize)
+* [wait-for](https://github.com/Eficode/wait-for)
+
+Ces scripts écoutent un hôte et un port spécifique, quand celui-ci répond, on lance notre app. Nous allons utilisé wait-for-it. De quoi a-t-on besoin ? :
+* **copier** le script dans notre container
+* **donner** des droits d'execution au script
+* indiquer au Dockerfile dans lancer le script avec les bons argument (host & port), puis lancer le service si la réponse nous convient.
+
+On télécharge le script et on le place dans notre dossier product-service, puis on modifie le Dockerile :
+
+```
+FROM node:latest
+
+WORKDIR /app
+
+COPY . .
+
+ENV PORT=3000
+
+RUN npm install
+
+EXPOSE $PORT
+
+COPY wait-for-it.sh /wait-for-it.sh
+
+RUN chmod +x /wait-for-it.sh
+```
+
+On a supprimé 'ENTRYPOINT' car nous allons dorénavent démarrer avec le docker-compose.yaml :
+
+```
+product-service:
+    command: ["/wait-for-it.sh", "product-db:8002", "--", "npm", "start"]
+    [...]
+product-db:
+```
+
+Cette commande indique que l'on lance le script wait-for-it et on utilise "product-db:8002" comme argument. Si la réponse est positive on lance 'npm start'. Voici notre fichier docker-compose.yaml au complet :
+
+```
+version: '3.3'
+services: 
+  product-service:
+    command: ["/wait-for-it.sh", "product-db:8002", "--", "npm", "start"]
+    build: 
+      context: ./product-service
+    ports:
+      - "8000:3000"
+    environment:
+      - test=testvalue
+      - DATABASE_PASSWORD=complexpassword
+      - DATABASE_HOST=product-db
+    volumes:
+      - type: bind
+        source: ./product-service
+        target: /app
+    networks:  
+      - products
+    depends_on: 
+      - "product-db"
+  inventory-service: 
+    build:
+      context: ./inventory-service
+    ports:
+      - "8001:3000"
+    volumes:
+      - my-volume:/var/lib/data
+  product-db:
+    build: ./product-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=complexpassword
+      - MYSQL_DATABASE=Products
+    ports:
+      - 8002:3306
+    networks:
+      - products
+
+volumes:  
+  my-volume:
+
+networks:
+  products:
+```
+
+On doit maintenant modifier notre app.js pour se connecter à la base de données :
+
+```
+const express = require('express')
+const mysql = require('mysql')
+const app = express()
+const port = process.env.PORT || 3000;
+const test = process.env.test;
+
+let attempts = 0;
+const seconds = 1000;
+
+function connect() {
+    attempts++;
+  
+    console.log('password', process.env.DATABASE_PASSWORD);
+    console.log('host', process.env.DATABASE_HOST);
+    console.log(`attempting to connect to DB time: ${attempts}`);
+  
+    const conn = mysql.createConnection({
+        host: process.env.DATABASE_HOST,  
+        user: "root",  
+        password: process.env.DATABASE_PASSWORD,  
+        database: 'Products'
+    });
+    conn.connect(function (err) {
+        if (err) {  
+            console.log("Error", err);  
+            setTimeout(connect, 30 * seconds);  
+        } else {  
+            console.log('CONNECTED!');  
+        }
+    });
+ 
+    conn.on('error', function(err) {  
+        if(err) {  
+            console.log('shit happened :)');  
+            connect()  
+        }   
+    });
+ 
+}
+connect();
+
+app.get('/', (req, res) => res.send('Hello product service'))
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+```
+
+Nous avons créé une fonction connect() qui créé une connexion avec createConnection(), qui prend en argument : hote, user, password, database. Le timeout sert à se reconnecter après 30s s'il y a eu une erreur auparavant. On utilise conn.on('error') car on peut 'perdre' la connexion. On réessaye donc de se connecter. 
+
+### Configuration de la base de données
