@@ -373,3 +373,6 @@ Cette architecture est flexible car sans (ou peu d') inter-dépendances. Il est 
 Docker va être une très bonne solution pour une architecture en micro-service on containerisant chaque micro-service. Docker compose va nous simplifier les choses car il nous permettra de gérer plusieurs containers. Sinon les lignes de commandes vont devenir très longues pour gérer de nombreux containers.
 
 ### Fonctionnalités de Docker compose
+*Pas d'instructions ici, passer à la suite*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step4-3-DockerNotEnough#fonctionnalit%C3%A9s-de-docker-compose)
