@@ -200,4 +200,4 @@ Rebuild le container et relance le. La route faite tout à l'heure doit fonction
 ### Installer et connecter Mysql
 *Instructions : vous pouvez déjà passer à la suite pour intaller mysql (ce n'est pas passionant)*
 
-[suivant](https://github.com/ValentinDupetitpre/wassup_docker/blob/Step3-2-mysqlDockerImg/README.md#step-3-db)
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-2-mysqlDockerImg#step-3-db)
