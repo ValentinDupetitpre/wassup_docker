@@ -350,3 +350,6 @@ docker run -p 8001:3306 --net isolated_network --name mysql-db -e MYSQL_ROOT_PAS
 Comme vous pouvez le voir, il suffit de rajouter le tag --net [name of network] pour intégrer le container au réseau. 
 
 ### Gestion de la base de données
+*Pas d'instructions ici, passer à la suite*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step4-1-WhyDockerCompose#gestion-de-la-base-de-donn%C3%A9es)
