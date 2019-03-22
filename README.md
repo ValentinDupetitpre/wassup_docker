@@ -334,3 +334,6 @@ docker logs my-container
 Si vous voyez apparaitre "Connected to mysql!" C'est que c'est bon. C'est le console log dans le callback de connexion de la bdd. Bravo
 
 ### Connecter des Containers différemment
+*Instructions : Créer un réseau nommé 'isolated_network', puis placer les deux containers (l'app et la bdd) sur ce réseau.[Plus d'infos ici](https://docs.docker.com/v17.09/engine/reference/commandline/network/) [et ici](https://docs.docker.com/v17.09/engine/reference/commandline/run/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-6-DbManagement#connecter-des-containers-diff%C3%A9remment)
