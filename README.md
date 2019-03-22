@@ -133,6 +133,6 @@ docker inspect [nom du volume]
 ```
 
 ### Monter un volume
-*Instructions : monter un volume que l'on nommera monVol. Inspecter le container et observer la propriété "Mounts". Se connecter dans le container et trouver le volume. [PLus d'infos ici](https://docs.docker.com/engine/reference/commandline/run/)*
+*Instructions : monter un volume que l'on nommera monVol. Inspecter le container et observer la propriété "Mounts". Se connecter dans le container et trouver le volume. [Plus d'infos ici](https://docs.docker.com/engine/reference/commandline/run/)*
 
 [suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step2-4-SubdirAsVolume#monter-un-volume)
