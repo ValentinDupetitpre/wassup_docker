@@ -382,3 +382,6 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 * Executer une commande unique sur un service
 
 ### Quand Docker seul n'est plus suffisant
+*Pas d'instructions ici, passer à la suite*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step4-4-DockerComposeInAction#quand-docker-seul-nest-plus-suffisant)
