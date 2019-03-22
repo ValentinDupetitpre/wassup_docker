@@ -80,3 +80,12 @@ docker rm <id>
 
 ## Step 2 
 ### Mise à jour de l'app
+  * Stopper le container
+  * Retirer le container
+  * Recréer l'image
+  * Lancer le container à nouveau
+
+*Instructions : Voici les étapes pour mettre à jour l'app dans le container. Donner un nom au container en le lancant. Chainer les différentes commandes pour effectuer tout le processus de mise à jour de l'app.*
+
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step2-2-createVolume)
