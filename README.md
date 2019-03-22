@@ -47,3 +47,7 @@ docker run -p 8000:3000 uxrepublic/node
 ```
 
 ### Ajouter des variables d'environnement
+*Instructions : ajouter une variable d'environnement pour le port 3000 dans le Dockerfile, puis mettre à jour le fichier avec cette variable*
+
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step1-6-ReadEnvVar)
