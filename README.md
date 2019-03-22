@@ -54,3 +54,6 @@ On a ajouté une variable d'environnement dans le Dockerfile pour le PORT. On ut
 Depuis Node, on peut lire les variables d'environnement grâce à process.env.PORT
 
 ### Gestion du container
+*Instructions : lancer un container en mode deamon, rentrer dans le container avec le mode interactif. Vérifier que tous les dossiers/fichiers de l'appli sont bien présent. Lancer la commande node app.js à travers une commande docker. Tuer le container*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step2-1-UpdateApp)
