@@ -383,7 +383,7 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 
 ### Quand Docker seul n'est plus suffisant
 
-Avec dockeriser quelque chose avec Docker il faut :
+Pour dockeriser quelque chose avec Docker il faut :
 * Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
 * Builder une image ou puller une image existente de Docker Hub.
 * Créer et lancer un container.
@@ -463,3 +463,6 @@ Docker compose prend en charge la totalité du cycle de vie des services. Liston
 Ce qui est très intéressant c'est de continuer à augmenter la taille de notre application.
 
 ### Application sur l'application complète
+*Instructions : ajouter la deuxième application sur le docker-compose.yaml. Tester.*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-1-EnvVar#application-sur-lapplication-compl%C3%A8te)
