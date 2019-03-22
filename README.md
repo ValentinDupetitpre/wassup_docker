@@ -164,7 +164,7 @@ Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans n
 On peut utiliser un répertoire en tant que volume avec Docker. Pour cela nous allons créer un fichier dans un nouveau repertoire : /logs/logs.txt que l'on initialize avec un texte.
 
 ```
-docker run -d -p 8000:3000 --name my-other-container --volume $(pwd)/logs:/logs uxrepublic/node
+docker run -d -p 8000:3000 --name my-other-container --volume $(pwd)/test:/logs uxrepublic/node
 ```
 
 Ici $(pwd)/logs indique que l'on va utiliser ce repertoire en tant que source pour le volume et que l'on va retrouver son contenu dans /logs dans le volume. Autrement dit, on monte le repertoire logs de notre dossier actuel dans un repertoire qui s'appelle logs dans le volume.
@@ -173,3 +173,6 @@ En lancant une commande bash sur le container on peut retrouver ce que l'on avai
 Si on modifie le fichier sur notre ordinateur, il s'en retrouve modifié dans le volume.
 
 ### Considérer une app comme un volume
+*Instructions : supprimer le container, puis le relancer avec l'application en tant que volume. Ajouter une route dans express, puis tester. Si ca ne fonctionne pas, installer nodemon puis mettre à jour le package.json. Mettre à jour le Dockerfile, réessayer.*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-1-installMysql#consid%C3%A9rer-une-app-comme-un-volume)
