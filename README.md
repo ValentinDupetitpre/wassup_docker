@@ -243,3 +243,6 @@ mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8001
 C'est connecté. Bravo. Mais..peut-on atteindre un container depuis un autre ? Pour ce faire on a besoin de lier les deux. Nous verrons ça plus tard.
 
 ### Connecter Node a Mysql
+*Instructions : installer mysql avec npm (ou yarn). Connecter l'application à la bdd avec les paramètre suivant : host:localhost ; port : 8001 ; use:root ; password:complexpassword ; database:Customer. Une fois ceci fait, passer à l'étape suivante pour résoudre le problème de connexion à mysql*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-4-linkingContainer#connecter-node-a-mysql)
