@@ -103,3 +103,7 @@ docker stop my-container && docker rm my-container && docker build -t uxrepublic
 C'est bien mais pas top, Ca fait beaucoup de commandes pour mettre à jour le container. On peut faire mieux...avec un volume. 
 
 ### Créer et gérer un Volume
+*Instructions : créer un volume, lister les volumes, supprimer un/des volumes, inspecter un volume. [Plus d'infos ici](https://docs.docker.com/engine/reference/commandline/volume/)*
+
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step2-3-mountVolume)
