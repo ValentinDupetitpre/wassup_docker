@@ -407,3 +407,6 @@ Tout va se passer dans le docker-compose.yaml, on y définit tous les services d
 * **Volumes**, on peut définir des volumes.
 
 ### Docker compose en pratique
+*Instructions : Créer deux dossiers (product-service et inventory-service) dans lesquels vous créez un projet simple express(app.js + package.json + Dockerfile). À la racine du projet (au même niveau que les deux dossiers), créer un docker-compose.yaml simple avec un service, build et ports pour le projet product-service. Lancer le container, puis l'éteindre. [Plus d'infos ici](https://docs.docker.com/v17.09/compose/overview/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step4-5-DockerComposeRecap#docker-compose-en-pratique)
