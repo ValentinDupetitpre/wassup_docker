@@ -357,3 +357,6 @@ Comme vous pouvez le voir, il suffit de rajouter le tag --net [name of network] 
 ## Step 4 Docker compose
 
 ### Pourquoi Docker compose
+*Pas d'instructions ici, passer à la suite*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step4-2-Features#step-4-docker-compose)
