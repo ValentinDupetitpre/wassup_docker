@@ -293,3 +293,6 @@ Mysql possède un plugin mysql_native_password qui implémente une authentificat
 La bibliothèque mysql de node est en retard sur Mysql 8 qui est passée à un nouveau système d'authentification pluggable. Donc soit vous choisissez de pull une version antérieure de MySql soit de revenir à l'authentification native.
 
 ### Connecter des Containers
+*Instructions : supprimer le container sur lequel on a travaillé jusqu'ici. Modifier le fichier app.js pour avoir comme host:mysql et supprimer le champs port. Mettre un message de réussite si la connextion est faite. Builder à nouveau le container puis le lier avec le container mysql-db. Vérifier que vous avez connecté les container avec un 'docker logs'. [Plus d'infos ici](https://docs.docker.com/v17.09/engine/reference/commandline/run/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-5-LinkingOtherWay#connecter-des-containers)
