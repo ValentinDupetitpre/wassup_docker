@@ -219,3 +219,6 @@ show tables;
 Votre table a bien été créée. Passons à la suite.
 
 ### Mysql en Image Docker 
+*Instructions : Lancer un container (nommé mysql-db) à partir d'une image mysql. Si une erreur apparait, tenter de la corriger. Accéder à la base de données via son port. [Plus d'infos ici](https://docs.docker.com/samples/library/mysql/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step3-3-ConnectNodeMysql#mysql-en-image-docker)
