@@ -383,7 +383,7 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 
 ### Quand Docker seul n'est plus suffisant
 
-Avec dockeriser quelque chose avec Docker il faut :
+Pour dockeriser quelque chose avec Docker il faut :
 * Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
 * Builder une image ou puller une image existente de Docker Hub.
 * Créer et lancer un container.
@@ -524,3 +524,6 @@ docker exec wassupdocker_product-service_1 env
 On doit retrouver le variable test avec sa valeur dans les résultats.
 
 ### Volumes - Créer un espace persistant
+*Instructions : Modifier le docker-compose.yaml pour y ajouter un volume (my-volume). L'appeler dans inventory-service et le mapper avec /var/lib/data. Vérifier qu'il existe bien dans le container et y créer un fichier avec une valeur. Inspecter le volume et observer le champs 'Mountpoint'. Supprimer et relancer le container, puis vérifier que le fichier est toujours là. [Plus d'infos ici](https://docs.docker.com/v17.09/engine/reference/commandline/volume/) *
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-3-VolumeCurrDirVolume#volumes---cr%C3%A9er-un-espace-persistant)
