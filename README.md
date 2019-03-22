@@ -383,7 +383,7 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 
 ### Quand Docker seul n'est plus suffisant
 
-Avec dockeriser quelque chose avec Docker il faut :
+Pour dockeriser quelque chose avec Docker il faut :
 * Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
 * Builder une image ou puller une image existente de Docker Hub.
 * Créer et lancer un container.
