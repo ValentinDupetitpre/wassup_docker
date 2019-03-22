@@ -383,7 +383,7 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 
 ### Quand Docker seul n'est plus suffisant
 
-Avec dockeriser quelque chose avec Docker il faut :
+Pour dockeriser quelque chose avec Docker il faut :
 * Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
 * Builder une image ou puller une image existente de Docker Hub.
 * Créer et lancer un container.
@@ -494,3 +494,6 @@ Attention, ceci fonctionne bien pour un premier lancement de l'application quand
 ## Step 5 - Docker compose suite
 
 ### Variables d'environnement
+*Instructions : Ajouter dans le docker-compose.yaml pour product-service une variable d'environnement test qui a pour valeur testvalue. Vérifier si la valeur est bien dans le container en lancant la commande docker exec <nom du container> env. [Plus d'infos ici](https://docs.docker.com/v17.09/compose/environment-variables/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-2-VolumePersistentSpace#step-5---docker-compose-suite)
