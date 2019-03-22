@@ -160,3 +160,6 @@ Le volume se trouve ici : ../monVol/
 Dorénavant, si nous stoppons le container, tout ce que nous avons créé dans notre volume sera persisté, le reste sera supprimé. 
 
 ### Monter un sous-répertoire en tant que volume
+*Insctructions : créer un répertoire test, puis y placer un fichier avec un une phrase test dedans. Monter ce répertoire test en tant que volume du container. Se connecter en bash au container et retrouver le fichier de test et son contenu. [Plus d'infos ici](https://docs.docker.com/engine/reference/commandline/run/)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step2-5-AppAsVolume#monter-un-sous-r%C3%A9pertoire-en-tant-que-volume)
