@@ -28,3 +28,5 @@ Permet de voir l'image que l'on vient de créer
 *Instructions : pour créer le container on va lancer l'image. Bien penser à mapper les ports (interne à Docker avec le port externe sur la machine hôte). [Aide ici](https://docs.docker.com/engine/reference/commandline/run/)*
 
 *docker ps vous permettra de vérifier si votre container est lancé.*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step1-5-AddEnvVar)
