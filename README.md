@@ -383,7 +383,7 @@ Avec Docker compose, on peut facilement builder plusieurs images d'un coup, lanc
 
 ### Quand Docker seul n'est plus suffisant
 
-Avec dockeriser quelque chose avec Docker il faut :
+Pour dockeriser quelque chose avec Docker il faut :
 * Définir un Dockerfile qui contient l'image OS dont on a besoin, les bibliothèque que l'on veut installer, les variables d'environnement dont on a besoin, les ports que l'on a besoin d'ouvrir et comment lancer notre service.
 * Builder une image ou puller une image existente de Docker Hub.
 * Créer et lancer un container.
@@ -641,3 +641,31 @@ mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8002
 Connecté ! 
 
 ### Connection à la base de données
+
+Les 3 principales méthodes de connexion à la base de données :
+* utiliser un client docker (mysql -uroot -pcomplexpassword -h 0.0.0.0 -P 8002)
+* entrer dans notre container en bash puis taper 'mysql'
+* se connecter à travers l'application en utilisant la bibliothèque NPM mysql. La BDD et l'application seront donc dans différents containers. Pour les connecter, il faut :
+  * qu'ils soient **sur le même réseau**.
+  * la **BDD doit être prête**. C'est relativement long de démarrer la BDD et pour que l'app puisse échanger avec la BDD il faut que celle-ci soit bien démarrée.
+  * **créer un objet de connexion**. Il faut s'assurer que l'on a bien un objet de connexion dans app.js pour product-service.
+
+*Instructions : *
+
+*1. Nous allons utiliser la dernière méthode. Créer un réseau à la fin du docker-compose.yaml, puis lier les services (product-service et product-db) à ce réseau [doc ici](https://docs.docker.com/v17.09/compose/compose-file/#networks). Le product-service doit s'assurer que le BDD est lancée avant de se lancer. Il y a donc un lien de dépendance [aide ici](https://docs.docker.com/v17.09/compose/compose-file/#depends_on)*
+
+*Maintenant on veut être sûr que notre BDD est lancée correctement avant de s'y connecter. S'il y a une(des) erreur(s), on ne veut pas s'y connecter. Pour savoir quand elle est prête on peut utiliser des script proposés par docker :
+* [wait-for-it](https://github.com/vishnubob/wait-for-it)
+* [dockerise](https://github.com/jwilder/dockerize)
+* [wait-for](https://github.com/Eficode/wait-for)
+
+*Ces scripts écoutent un hôte et un port spécifique, quand celui-ci répond, on lance notre app. Nous allons utilisé wait-for-it. De quoi a-t-on besoin ? :
+* **copier** le script dans notre container
+* **donner** des droits d'execution au script
+* indiquer au Dockerfile dans lancer le script avec les bons argument (host & port), puis lancer le service si la réponse nous convient.
+
+*2. Pour ceci, télécharger le script et le placer dans le dossier product-service, puis modifier le Dockerile. Supprimer le champs ENTRYPOINT de celui-ci car nous allons désormais démarrer le container avec docker-compose. Mettre à jour le docker-compose.yaml [aide ici](https://docs.docker.com/v17.09/compose/compose-file/#command). Il est important de passer en version 3.3 sur le docker-compose.yaml*
+
+*3. Modifier le fichier app.js pour se connecter à la base de données. Pour info, le dossier /product-db contient un Dockerfile simple et un fichier pour créer la base de données.*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-6-SetUpDb#connexion-%C3%A0-la-base-de-donn%C3%A9es)
