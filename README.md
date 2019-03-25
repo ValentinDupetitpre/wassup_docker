@@ -554,3 +554,6 @@ Ici, on créé un volume qui s'appelle "my-volume" en bas du fichier. On l'appel
 Maintenant nous pouvons inspecter notre volume et observer le champs 'Mountpoint'. On peut éteindre et supprimer notre container puis le relancer pour vérifier si notre fichier est bien persisté. Il est toujours là !
 
 ### Volumes - Répertoire courant comme volume
+*Instructions : Dans le docker-compose.yaml, s'assurer que votre version est bien 3.2. Dans le service product-service, créer un volume avec comme source votre répertoire courant, et placer ce qu'il y a dans le répertoire courant dans un dossier app/ du container. Vérifier que cela fonctionne en lancant le container, modifier un fichier de product-service et s'assurer que le changement se répercute dans le container. [Plus d'infos ici](https://docs.docker.com/v17.09/compose/compose-file/#volumes)*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-4-AddingDb#volumes---r%C3%A9pertoire-courant-comme-volume)
