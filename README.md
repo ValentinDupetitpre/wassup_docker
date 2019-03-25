@@ -592,6 +592,6 @@ Nous avons mis à jour la version du Dockerfile pour utiliser le volume en bind.
 Si nous modifions un fichier dans la source, le changement sera répercuté dans target.
 
 ### Ajout d'une base de données
-*Instructions : dans le docker-compose.yaml, ajouter un service que l'on appellera product-db. Il utilisera l'image mysql, définira une variable MYSQL_ROOT_PASSWORD égale à 'complexpassword' et matchera le port du container 3306 au port de la machine 8002. Lancer docker, vérifie que le service tourne. On peut essayer de se connecter à la bdd en root avec le mot de passe que l'on vient de définir, sur le bon port. (info : la commande commence par mysql) *
+*Instructions : dans le docker-compose.yaml, ajouter un service que l'on appellera product-db. Il utilisera l'image mysql, définira une variable MYSQL_ROOT_PASSWORD égale à 'complexpassword' et matchera le port du container 3306 au port de la machine 8002. Lancer docker, vérifie que le service tourne. On peut essayer de se connecter à la bdd en root avec le mot de passe que l'on vient de définir, sur le bon port. (info : la commande commence par mysql)*
 
 [suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-5-ConnectToDb#ajout-dune-base-de-donn%C3%A9es)
