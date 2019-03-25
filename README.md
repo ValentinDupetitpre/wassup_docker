@@ -650,16 +650,16 @@ Les 3 principales méthodes de connexion à la base de données :
   * la **BDD doit être prête**. C'est relativement long de démarrer la BDD et pour que l'app puisse échanger avec la BDD il faut que celle-ci soit bien démarrée.
   * **créer un objet de connexion**. Il faut s'assurer que l'on a bien un objet de connexion dans app.js pour product-service.
 
-*Instructions : *
+*Instructions :*
 
 *1. Nous allons utiliser la dernière méthode. Créer un réseau à la fin du docker-compose.yaml, puis lier les services (product-service et product-db) à ce réseau [doc ici](https://docs.docker.com/v17.09/compose/compose-file/#networks). Le product-service doit s'assurer que le BDD est lancée avant de se lancer. Il y a donc un lien de dépendance [aide ici](https://docs.docker.com/v17.09/compose/compose-file/#depends_on)*
 
-*Maintenant on veut être sûr que notre BDD est lancée correctement avant de s'y connecter. S'il y a une(des) erreur(s), on ne veut pas s'y connecter. Pour savoir quand elle est prête on peut utiliser des script proposés par docker :
+*Maintenant on veut être sûr que notre BDD est lancée correctement avant de s'y connecter. S'il y a une(des) erreur(s), on ne veut pas s'y connecter. Pour savoir quand elle est prête on peut utiliser des script proposés par docker :*
 * [wait-for-it](https://github.com/vishnubob/wait-for-it)
 * [dockerise](https://github.com/jwilder/dockerize)
 * [wait-for](https://github.com/Eficode/wait-for)
 
-*Ces scripts écoutent un hôte et un port spécifique, quand celui-ci répond, on lance notre app. Nous allons utilisé wait-for-it. De quoi a-t-on besoin ? :
+*Ces scripts écoutent un hôte et un port spécifique, quand celui-ci répond, on lance notre app. Nous allons utilisé wait-for-it. De quoi a-t-on besoin ? :*
 * **copier** le script dans notre container
 * **donner** des droits d'execution au script
 * indiquer au Dockerfile dans lancer le script avec les bons argument (host & port), puis lancer le service si la réponse nous convient.
