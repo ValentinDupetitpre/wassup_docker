@@ -825,3 +825,6 @@ Dans le docker-compose.yaml on build un dossier /product-db. Il contient ceci :
 Vous pouvez récupérer les données de ces fichiers sur github. Nous les expliquerons plus tard.
 
 ### Configuration de la base de données
+*Pas d'instructions ici, passer à la suite pour quelques expliquations*
+
+[suivant](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step5-7-finish#configuration-de-la-base-de-donn%C3%A9es)
