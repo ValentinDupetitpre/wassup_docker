@@ -1,4 +1,8 @@
 # wassup_docker
+
+*Ici vous pouvez avancer étapes par étapes dans un atelier de découverte de Docker. Pour ceci il faut passer de branches en branches en suivant les instructions et en vérifiant vos résultats sur la branche suivante. Je vous conseil de prendre quelques notes au cours de cet atelier pour mettre de côté les infos principales. Commencez par aller sur la branche [Step1-1-ExpressEnv](https://github.com/ValentinDupetitpre/wassup_docker/tree/Step1-1-ExpressEnv)*
+
+
 ## Pré-requis
 https://runnable.com/docker/install-docker-on-macos
 
